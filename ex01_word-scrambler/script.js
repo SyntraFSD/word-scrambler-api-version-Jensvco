@@ -1,72 +1,69 @@
-//select textarea
-let userInput;
-//select btn
-let submitBtn;
-//select result container
-let resultContainer;
-//# select wordCount
-let wordCountContainer;
-//# select letterCount
-let letterCountContainer;
+// select textarea
+const userInput = document.querySelector('#user-input');
+// select btn
+const submitBtn = document.querySelector('#submit-btn');
+// select result container
+const resultContainer = document.querySelector('#result-container');
+// # select wordCount
+const wordCountContainer = document.querySelector('#word-count');
+// # select letterCount
+const letterCountContainer = document.querySelector('#letter-count');
+
 
 
 function getUserInput() {
-  //return value of userInput
+  // return value of userInput
+  return userInput.value;
 }
 
-function textToWordArray(text) {
-  //return array of words
-}
+function scrambleText() {
+  var newText = new XMLHttpRequest();
+  newText.readystatechange = function () {
+    if (newText.readyState = 4 && newText.status = 200){
+      getUserInput() = newText.responseText;
+    }
 
-function arrayToText(array) {
-}
+  };
+  newText.open('GET', true);
+  newText.send;
 
-function getRandomNumber(max) {
-  //return random number between 0 and max (including 0 and excluding max)
-}
-
-function scrambleArray(oldArray) {
-  //return scrambled array
-}
-
-function scrambleText(text) {
-  // return scrambled text
-}
-
-function onClickScramble() {
-  // update textContent of resultContainer
-}
-
-function realTimeScramble(event) {
-  //## update textContent of resultContainer realtime
 }
 
 function getWordCount(text) {
-  //# return word count
+  // # return word count
+  const userInputArray = textToWordArray(text);
+  return userInputArray.length;
 }
 
 function getLetterCount(text) {
-  //# return letter count
+  // # return letter count
+  return text.length;
 }
 
 function updateWordCount(wordCount) {
-  //# update the Word Count
+  // # update the Word Count
+  wordCountContainer.textContent = wordCount;
 }
 
 function updateLetterCount(letterCount) {
-  //# update the Letter Count
+  // # update the Letter Count
+  letterCountContainer.textContent = letterCount;
 }
 
-function updateCounts(event) {
-  //# update Word Count and Letter Count
-  let currentText = this.value;
-  // this when function is executed by event => event.target
-  // this.value == event.target.value
+function updateCounts() {
+  // # update Word Count and Letter Count
+  const currentText = this.value;
+  //  this when function is executed by event => event.target
+  //  this.value == event.target.value
+  const wordCount = getWordCount(currentText);
+  const letterCount = getLetterCount(currentText);
+  updateWordCount(wordCount);
+  updateLetterCount(letterCount);
 }
 
-//add click event listener to submitBtn
-submitBtn.addEventListener("click", onClickScramble);
-//# add input event listener to userInput for counts
-userInput.addEventListener("input", updateCounts);
-//## add input event listener to userinput for realTimeScramble
-userInput.addEventListener("input", realTimeScramble);
+// add click event listener to submitBtn
+submitBtn.addEventListener('click', onClickScramble);
+// # add input event listener to userInput for counts
+userInput.addEventListener('input', updateCounts);
+// ## add input event listener to userInput for realTimeScramble
+userInput.addEventListener('input', realTimeScramble);
