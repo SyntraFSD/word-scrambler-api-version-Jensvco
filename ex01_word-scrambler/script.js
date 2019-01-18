@@ -17,15 +17,19 @@ function getUserInput() {
 }
 
 function scrambleText() {
-  var newText = new XMLHttpRequest();
-  newText.readystatechange = function () {
-    if (newText.readyState = 4 && newText.status = 200){
-      getUserInput() = newText.responseText;
-    }
-
+  const input = document.getElementById('user-input').value;
+  const postData = {
+    text: input
   };
-  newText.open('GET', true);
-  newText.send;
+  var request = new XMLHttpRequest();
+  request.addEventListener('readystatechange', function () {
+    if (request.readyState === 4 && request.status === 200){
+
+    }
+  });
+  request.open('POST', 'http://connect4.pienter.space/api/scramble');
+  request.setRequestHeader('Content-Type', 'application/json');
+  request.send(JSON.stringify(postData));
 
 }
 
